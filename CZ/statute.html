@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bohemians</title>
+    <link rel="icon" type="image/png" href="../Logo.png">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script defer src="../script.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Stanovy spolku</h1>
+        <div class="navigation" id="mynavigation">
+            <a href="index.html">Noviny</a>
+            <a href="about.html">O nás</a>
+            <a href="join.html">Přidejte se k nám</a>
+            <a href="statute.html" class="active">Stanovy spolku</a>
+            <a href="contacts.html">Kontakty</a>
+            <a href="congress.html">Sněm</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">☰</a>
+        </div>
+        <!--<div class="language-switcher">
+            <a href="../CZ/statute.html">CZ</a>
+            <a href="../RU/statute.html">RU</a>
+        </div>-->
+    </header>
+
+    <main>
+
+      <div class="statutes-container">
+          <div class="statutes-header">
+              <h1><i class="fas fa-file-contract"></i> Stanovy spolku</h1>
+              <p class="subtitle">Právní základ organizace Bohemians. Past, present, future, z.s.</p>
+          </div>
+          
+          <div class="statutes-intro">
+              <p>Úplné znění stanov je k dispozici na vyžádání. Zde uvádíme klíčová ustanovení:</p>
+              <div class="download-box">
+                  <a href="./../files/stanovy.zip" download class="download-btn">
+                      <i class="fas fa-download"></i> Stáhnout úplné stanovy
+                  </a>
+                  <span class="file-info"><i class="fas fa-info-circle"></i> Aktualizováno 14.7.2025</span>
+              </div>
+          </div>
+          
+          <div class="statute-article">
+              <div class="article-header">
+                  <div class="article-number">I</div>
+                  <h2>Název a sídlo</h2>
+              </div>
+              <div class="article-content">
+                  <p>Spolek působí pod názvem <em>Bohemians. Past, present, future, z.s.</em> se sídlem v Praze 4-Kunraticích, Merhoutova 1388/5, PSČ 14800.</p>
+                  <div class="highlight-box">
+                      <p><i class="fas fa-info-circle"></i> Spolek je zapsán podle zákona č. 89/2012 Sb., občanský zákoník a je právnickou osobou.</p>
+                  </div>
+              </div>
+          </div>
+          
+          <div class="statute-article">
+              <div class="article-header">
+                  <div class="article-number">II</div>
+                  <h2>Cíle činnosti</h2>
+              </div>
+              <div class="article-content">
+                  <p>Hlavní cíle spolku:</p>
+                  <ul>
+                      <li>Sdružování krajanů (repatriantů) českého původu vracejících se do ČR</li>
+                      <li>Zprostředkování informací pro začlenění do české společnosti</li>
+                      <li>Shromažďování a publikace dokumentů o historii českých krajanů</li>
+                      <li>Organizace setkání, přednášek a konferencí</li>
+                      <li>Pomoc při komunikaci s úřady ČR</li>
+                  </ul>
+                  <div class="important-note">
+                      <p><i class="fas fa-exclamation-circle"></i> Spolek není vázán na žádnou politickou stranu.</p>
+                  </div>
+              </div>
+          </div>
+          
+          <div class="statute-article">
+              <div class="article-header">
+                  <div class="article-number">III</div>
+                  <h2>Členství</h2>
+              </div>
+              <div class="article-content">
+                  <p>Členem spolku se může stát:</p>
+                  <ul>
+                      <li>Čech, který se navrátil do ČR z Ukrajiny nebo jiných států</li>
+                      <li>Rodinní příslušníci repatriantů</li>
+                  </ul>
+                  <p>Možnosti členství:</p>
+                  <div class="membership-types">
+                      <div class="membership-card">
+                          <h3><i class="fas fa-user-check"></i> Řádné členství</h3>
+                          <ul>
+                              <li>Právo účastnit se Sněmu</li>
+                              <li>Právo volit a být volen</li>
+                              <li>Povinnost dodržovat stanovy</li>
+                          </ul>
+                      </div>
+                      <div class="membership-card">
+                          <h3><i class="fas fa-user-friends"></i> Asociované členství</h3>
+                          <ul>
+                              <li>Právo účastnit se akcí spolku</li>
+                              <li>Možnost účasti na Sněmu jako host</li>
+                              <li>Žádné formální povinnosti</li>
+                          </ul>
+                      </div>
+                  </div>
+                  <p>Členství zaniká: vystoupením, vyloučením nebo úmrtím.</p>
+              </div>
+          </div>
+          
+          <div class="statute-article">
+            <div class="article-header">
+                <div class="article-number">IV</div>
+                <h2>Orgány spolku</h2>
+            </div>
+            <div class="article-content">
+                <div class="organs-container">
+                    <div class="organ-card">
+                        <div class="organ-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Sněm</h3>
+                        <ul>
+                            <li>Nejvyšší orgán spolku</li>
+                            <li>Schvaluje stanovy a jejich změny</li>
+                            <li>Volí předsedu a členy výboru</li>
+                            <li>Rozhoduje o zrušení spolku</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="organ-card">
+                        <div class="organ-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3>Předseda</h3>
+                        <ul>
+                            <li>Jedná jménem spolku</li>
+                            <li>Zastupuje spolek navenek</li>
+                            <li>Volen na 2 roky</li>
+                            <li>Svolává schůze výboru a sněmy</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="organ-card">
+                        <div class="organ-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h3>Výbor</h3>
+                        <ul>
+                            <li>Statutární orgán spolku</li>
+                            <li>Skládá se z předsedy a 2 místopředsedů</li>
+                            <li>Vede registr členů</li>
+                            <li>Schvaluje jednací řád</li>
+                        </ul>
+                    </div>
+                  </div>
+              </div>
+          </div>
+          <div class="statute-article">
+              <div class="article-header">
+                  <div class="article-number">VIII</div>
+                  <h2>Rozhodování</h2>
+              </div>
+              <div class="article-content">
+                  <p>Všechna jednání orgánů spolku lze provádět offline i elektronicky. Orgány jsou usnášeníschopné při účasti nadpoloviční většiny členů a rozhodují se nadpoloviční většinou hlasů.</p>
+              </div>
+          </div>
+          
+          <div class="statute-article">
+              <div class="article-header">
+                  <div class="article-number">IX</div>
+                  <h2>Obecné zásady</h2>
+              </div>
+              <div class="article-content">
+                  <ul>
+                      <li>Volební období všech funkcí je 2 roky</li>
+                      <li>Orgány si schvalují jednací a volební řády</li>
+                      <li>Na jakoukoli funkci je možné rezignovat</li>
+                      <li>Zakladateli se stávají všichni účastníci zakládající schůze</li>
+                  </ul>
+              </div>
+          </div>
+          
+<p class="cta">Máte další otázky? Napište nám na <a href="mailto:reemigranti.krajane@seznam.cz">reemigranti.krajane@seznam.cz</a> nebo zavolejte na +420 000 000 000!</p>
+      </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Bohemians.Past, present, future, z.s.</p>
+        <p>IČO: 23241241</p>
+    </footer>
+</body>
+</html>
