@@ -677,7 +677,7 @@ footer {
 }
 .map iframe {
     width: 100%;
-    height: auto;
+    height: 500px;
 }
 .map img {
     width: 100%;
@@ -691,7 +691,7 @@ footer {
     }
     .map iframe {
         width: 100%;
-        height: auto;
+        height: 200px;
     }
     .map img {
         width: 100%;
