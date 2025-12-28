@@ -579,7 +579,7 @@ ul.check-list li::before {
         transform: translateY(-150%);
         transition: transform 0.3s ease-in-out;
         box-shadow: 0 10px 10px rgba(0,0,0,0.1);
-        max-height: calc(100vh - 85px); /* Меню не может быть выше, чем остаток экрана */
+        max-height: calc(100vh - 100px); /* Меню не может быть выше, чем остаток экрана */
         overflow-y: auto; /* Если контента много — появляйся скролл! */
     }
 
