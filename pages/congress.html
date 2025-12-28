@@ -3,67 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bohemians</title>
+    <title>Bohemians | Sněm</title>
     <link rel="icon" type="image/png" href="../Logo.png">
     <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script defer src="../script.js"></script>
 </head>
 <body>
     <header>
-        <h1>Sněm</h1>
-        <div class="navigation" id="mynavigation">
-            <a href="../index.html">Noviny</a>
-            <a href="about.html">O nás</a>
-            <a href="join.html">Přidejte se k nám</a>
-            <a href="statute.html">Stanovy spolku</a>
-            <a href="contacts.html">Kontakty</a>
-            <a href="congress.html" class="active">Sněm</a>
-            <a href="javascript:void(0);" class="icon" onclick="myFunction()">☰</a>
+        <div class="header-container">
+            <h1>Sněm</h1>
+            <button class="hamburger"><i class="fas fa-bars"></i></button>
+            <nav class="nav-menu">
+                <a href="../index.html" class="nav-link">Noviny</a>
+                <a href="about.html" class="nav-link">O nás</a>
+                <a href="join.html" class="nav-link">Přidejte se k nám</a>
+                <a href="statute.html" class="nav-link">Stanovy spolku</a>
+                <a href="contacts.html" class="nav-link">Kontakty</a>
+                <a href="congress.html" class="nav-link active">Sněm</a>
+            </nav>
         </div>
-        <!--<div class="language-switcher">
-            <a href="../CZ/congress.html">CZ</a>
-            <a href="../RU/congress.html">RU</a>
-        </div>-->
     </header>
 
     <main>
-
-        <section>
-<h1>Sněm spolku</h1>
-<p>Nejvyšší orgán spolku, v němž mají hlas všichni členové. Zasedá minimálně 1× ročně.</p>
-<h2>Pravomoci sněmu</h2>
-<div class="assembly-powers">
-  <div class="power-item">
-    <h4><i class="fas fa-check-circle"></i> Schvalování stanov</h4>
-<ul>
-  <li>Schvalování a změny stanov</li>
-  <li>Volba předsedy a členů výboru</li>
-  <li>Rozhodování o přijímání nových členů</li>
-  <li>Rozpuštění nebo zánik spolku</li>
-  <li>Schvalování vnitřních dokumentů (jednací řád, volební řád)</li>
-</ul>
-
-<h2>Organizace jednání</h2>
-<ul>
-  <li>Koná se <strong>offline</strong> (prezenčně) nebo <strong>elektronicky</strong> (online)</li>
-  <li>Usnášeníschopný při účasti nadpoloviční většiny členů</li>
-  <li>Rozhoduje se většinou hlasů přítomných členů</li>
-  <li>Předseda svolává sněm dle potřeby</li>
-</ul>
-
-<h2>Volby na sněmu</h2>
-<ul>
-  <li>Funkční období: 2 roky (od ukončení volební schůze)</li>
-  <li>Zvolen je kandidát s nejvyšším počtem platných hlasů</li>
-  <li>Možnost kombinovaného hlasování (fyzicky, elektronicky, korespondenčně)</li>
-</ul>
+        <section class="hero" style="text-align: center;">
+            <h2><i class="fas fa-gavel"></i> Sněm spolku</h2>
+            <p>Nejvyšší orgán spolku, v němž mají hlas všichni členové. Zasedá minimálně 1× ročně.</p>
         </section>
 
+        <h3 class="section-title">Pravomoci sněmu</h3>
+        <div class="cards-grid">
+            <div class="card">
+                <h3><i class="fas fa-check-double"></i> Rozhodování</h3>
+                <ul class="check-list">
+                    <li>Schvalování a změny stanov</li>
+                    <li>Rozhodování o přijímání nových členů</li>
+                    <li>Schvalování vnitřních dokumentů (jednací řád)</li>
+                    <li>Rozpuštění nebo zánik spolku</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-users-cog"></i> Volby</h3>
+                <ul class="check-list">
+                    <li>Volba předsedy spolku</li>
+                    <li>Volba členů výboru</li>
+                    <li>Volba kontrolní komise</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-calendar-alt"></i> Organizace jednání</h3>
+                <ul class="check-list">
+                    <li>Koná se offline nebo elektronicky</li>
+                    <li>Usnášeníschopný při účasti nadpoloviční většiny</li>
+                    <li>Předseda svolává sněm dle potřeby</li>
+                </ul>
+            </div>
+        </div>
     </main>
 
     <footer>
-      <p>&copy; 2025 Bohemians.Past, present, future, z.s.</p>
-      <p>IČO: 23241241</p>
+        <p>&copy; 2025 Bohemians. Past, present, future, z.s. | IČO: 23241241</p>
     </footer>
 </body>
 </html>
