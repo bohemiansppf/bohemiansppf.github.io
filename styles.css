@@ -1,23 +1,29 @@
 /* === MODERN RESET & VARIABLES === */
 :root {
     /* Палитра: солидная, патриотичная, но современная */
-    --primary-blue: #0f3d6e;    /* Глубокий синий */
-    --primary-red: #c61a20;     /* Благородный красный */
-    --accent-blue: #00AEEF;     /* Яркий голубой для акцентов */
-    --text-dark: #2c3e50;       /* Темно-серый для текста (мягче черного) */
-    --text-light: #f8f9fa;      /* Светлый фон */
+    --primary-blue: #0f3d6e; /* Глубокий синий */
+    --primary-red: #c61a20; /* Благородный красный */
+    --accent-blue: #00aeef; /* Яркий голубой для акцентов */
+    --text-dark: #2c3e50; /* Темно-серый для текста (мягче черного) */
+    --text-light: #f8f9fa; /* Светлый фон */
     --white: #ffffff;
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --radius: 8px;              /* Скругление углов */
+    --shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --radius: 8px; /* Скругление углов */
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
-
 body {
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; /* Системные шрифты - быстро и красиво */
+    font-family:
+        "Segoe UI",
+        system-ui,
+        -apple-system,
+        sans-serif; /* Системные шрифты - быстро и красиво */
     margin: 0;
     padding: 0;
     background-color: var(--text-light);
@@ -74,7 +80,8 @@ header h1 {
     font-weight: 500;
 }
 
-.nav-link:hover, .nav-link.active {
+.nav-link:hover,
+.nav-link.active {
     background-color: rgba(255, 255, 255, 0.15);
     color: var(--white);
 }
@@ -115,7 +122,8 @@ main {
 }
 
 /* News Grid - Самое важное для стиля */
-.news h3, .section-title {
+.news h3,
+.section-title {
     text-align: center;
     font-size: 2rem;
     color: var(--primary-blue);
@@ -127,10 +135,121 @@ main {
 
 .news-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Автоматическая сетка */
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(300px, 1fr)
+    ); /* Автоматическая сетка */
     gap: 25px;
 }
+/* === LIGHTBOX (ГАЛЕРЕЯ) === */
+.lightbox {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed;
+    z-index: 2000; /* Поверх всего, даже хедера */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.9); /* Темный фон */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
 
+.lightbox.active {
+    display: flex;
+    opacity: 1;
+}
+
+.lightbox-content-wrapper {
+    position: relative;
+    max-width: 90%;
+    max-height: 80%;
+    text-align: center;
+}
+
+.lightbox-content {
+    max-width: 100%;
+    max-height: 80vh; /* Чтобы не вылезало за экран */
+    border-radius: var(--radius);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    object-fit: contain;
+}
+
+#lightbox-caption {
+    margin-top: 15px;
+    color: var(--white);
+    font-size: 1.1rem;
+    text-align: center;
+    max-width: 800px;
+    line-height: 1.4;
+}
+
+/* Кнопки управления */
+.close-lightbox {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    z-index: 2001;
+}
+
+.close-lightbox:hover {
+    color: var(--accent-blue);
+}
+
+.lightbox-prev,
+.lightbox-next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    background: rgba(0, 0, 0, 0.2); /* Полупрозрачный фон */
+    border: none;
+    z-index: 2001;
+}
+
+.lightbox-next {
+    right: 10px;
+    border-radius: 3px 0 0 3px;
+}
+
+.lightbox-prev {
+    left: 10px;
+    border-radius: 3px 0 0 3px;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    background-color: var(--primary-red); /* Красный при наведении */
+}
+
+/* Адаптив для телефонов */
+@media (max-width: 768px) {
+    .lightbox-content {
+        max-width: 95%;
+    }
+    .lightbox-prev,
+    .lightbox-next {
+        padding: 10px;
+        font-size: 18px;
+    }
+}
 .news-item {
     background: var(--white);
     border-radius: var(--radius);
@@ -244,7 +363,7 @@ td {
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .card h3 {
@@ -277,8 +396,8 @@ ul.check-list li {
 }
 
 ul.check-list li::before {
-    content: '\f00c'; /* FontAwesome check icon */
-    font-family: 'Font Awesome 6 Free';
+    content: "\f00c"; /* FontAwesome check icon */
+    font-family: "Font Awesome 6 Free";
     font-weight: 900;
     position: absolute;
     left: 0;
@@ -380,7 +499,7 @@ ul.check-list li::before {
 
 .member-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
 /* Шапка карточки */
@@ -445,8 +564,8 @@ ul.check-list li::before {
 
 /* Галочки */
 .info-block li::before {
-    content: '\f00c'; /* FontAwesome check */
-    font-family: 'Font Awesome 6 Free';
+    content: "\f00c"; /* FontAwesome check */
+    font-family: "Font Awesome 6 Free";
     font-weight: 900;
     position: absolute;
     left: 0;
@@ -482,13 +601,17 @@ ul.check-list li::before {
     background: var(--primary-red);
     color: white;
 }
-.btn-primary:hover { background: #a0151a; }
+.btn-primary:hover {
+    background: #a0151a;
+}
 
 .btn-secondary {
     background: #6c757d;
     color: white;
 }
-.btn-secondary:hover { background: #545b62; }
+.btn-secondary:hover {
+    background: #545b62;
+}
 /* Аккордеон для FAQ */
 .faq-item {
     background: white;
@@ -567,7 +690,7 @@ ul.check-list li::before {
         display: block; /* Показываем кнопку */
     }
 
-.nav-menu {
+    .nav-menu {
         position: fixed;
         top: 60px; /* Высота хедера */
         left: 0;
@@ -578,8 +701,10 @@ ul.check-list li::before {
         gap: 10px;
         transform: translateY(-150%);
         transition: transform 0.3s ease-in-out;
-        box-shadow: 0 10px 10px rgba(0,0,0,0.1);
-        max-height: calc(100vh - 100px); /* Меню не может быть выше, чем остаток экрана */
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+        max-height: calc(
+            100vh - 100px
+        ); /* Меню не может быть выше, чем остаток экрана */
         overflow-y: auto; /* Если контента много — появляйся скролл! */
     }
 
@@ -592,7 +717,7 @@ ul.check-list li::before {
         width: 100%;
         display: block;
         padding: 15px;
-        border: 1px solid rgba(255,255,255,0.1);
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .hero {
