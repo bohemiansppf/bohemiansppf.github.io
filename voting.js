@@ -183,7 +183,7 @@ function renderPolls() {
           ${
             currentUser && !isClosed 
             ? `<button class="btn-primary-small btn-vote" data-poll="${poll.id}" data-option="${idx}">
-                 ${isUserChoice ? 'Změnit volbu' : 'Hlasovat'}
+                 ${isUserChoice ? 'Hlas započítán' : 'Hlasovat'}
                </button>`
             : ''
           }
