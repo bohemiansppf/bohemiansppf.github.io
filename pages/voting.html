@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="cs">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Bohemians | Hlasování</title>
+        <link rel="icon" type="image/png" href="../Logo.png" />
+        <link rel="stylesheet" href="../styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <script defer src="../script.js"></script>
+    </head>
+    <body>
+        <header>
+            <div class="header-container">
+                <h1>Hlasování</h1>
+                <button class="hamburger"><i class="fas fa-bars"></i></button>
+                <nav class="nav-menu">
+                    <a href="../index.html" class="nav-link">Noviny</a>
+                    <a href="foto.html" class="nav-link">Fotogalerie</a>
+                    <a href="about.html" class="nav-link">O nás</a>
+                    <a href="join.html" class="nav-link">Přidejte se k nám</a>
+                    <a href="statute.html" class="nav-link">Stanovy spolku</a>
+                    <a href="contacts.html" class="nav-link">Kontakty</a>
+                    <a href="congress.html" class="nav-link">Sněm</a>
+                    <a href="voting.html" class="nav-link active">Hlasování</a>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section class="hero" style="text-align: center">
+                <h2><i class="fas fa-vote-yea"></i> Členské hlasování</h2>
+                <p>
+                    Oficiální hlasování pro registrované členy spolku Bohemians. 
+                    Výsledky jsou veřejně přístupné všem návštěvníkům.
+                </p>
+            </section>
+
+            <!-- Панель авторизации -->
+            <div class="auth-card">
+                <!-- Состояние: НЕ авторизован (по умолчанию) -->
+                <div id="auth-logged-out" class="auth-box">
+                    <div class="auth-info">
+                        <i class="fas fa-lock"></i>
+                        <span>Hlasování je přístupné pouze pro registrované členy spolku.</span>
+                    </div>
+                    <button id="btn-show-login" class="btn-primary-small">
+                        <i class="fas fa-sign-in-alt"></i> Přihlásit se
+                    </button>
+                </div>
+
+                <!-- Обновленная форма логина (замени соответствующий блок в voting.html) -->
+                <form id="login-form" class="login-form" style="display: none;">
+                    <h3><i class="fas fa-user-shield"></i> Přihlášení člena</h3>
+                    <div class="form-group">
+                        <label for="username">Přihlašovací jméno (Login)</label>
+                        <input type="text" id="username" placeholder="např. jan_novak" required autocomplete="username" />
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Heslo</label>
+                        <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password" />
+                    </div>
+                    <div id="auth-error" class="auth-error" style="display: none;"></div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary-small">Vstoupit</button>
+                        <button type="button" id="btn-cancel-login" class="btn-secondary-small">Zrušit</button>
+                    </div>
+                </form>
+
+                <!-- Состояние: АВТОРИЗОВАН (скрыто) -->
+                <div id="auth-logged-in" class="auth-box" style="display: none;">
+                    <div class="auth-info">
+                        <i class="fas fa-user-check" style="color: #2e7d32;"></i>
+                        <span>Přihlášen jako: <strong id="user-email">...</strong></span>
+                    </div>
+                    <button id="btn-logout" class="btn-secondary-small">
+                        <i class="fas fa-sign-out-alt"></i> Odhlásit se
+                    </button>
+                </div>
+            </div>
+
+            <!-- Лента голосований -->
+            <div id="polls-container" class="polls-container">
+                <!-- Индикатор загрузки -->
+                <div class="polls-loading">
+                    <i class="fas fa-spinner fa-spin"></i> Načítání hlasování...
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>
+                &copy; 2025 Bohemians. Past, present, future, z.s. | IČO:
+                23241241
+            </p>
+        </footer>
+
+        <!-- Firebase SDK и скрипт голосования -->
+        <script type="module" src="../voting.js"></script>
+    </body>
+</html>
