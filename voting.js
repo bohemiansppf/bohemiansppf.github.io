@@ -99,22 +99,40 @@ document.addEventListener("DOMContentLoaded", () => {
   // Отслеживание состояния входа
   onAuthStateChanged(auth, (user) => {
     currentUser = user;
+    const pollsContainer = document.getElementById('polls-container');
+  
     if (user) {
-      // Вытягиваем чистый логин без @bohemians.local
+      // 1. Показываем шапку авторизованного юзера
       const cleanUsername = user.email ? user.email.split("@")[0] : "Člen";
       if (userEmailSpan) userEmailSpan.innerText = cleanUsername;
-
+  
       if (authLoggedOut) authLoggedOut.style.display = "none";
       if (loginForm) loginForm.style.display = "none";
       if (authLoggedIn) authLoggedIn.style.display = "flex";
+  
+      // 2. Загружаем и отрисовываем голосования
+      renderPolls();
     } else {
+      // 1. Показываем шапку для гостя
       if (authLoggedIn) authLoggedIn.style.display = "none";
       if (loginForm) loginForm.style.display = "none";
       if (authLoggedOut) authLoggedOut.style.display = "flex";
+  
+      // 2. Вместо списка голосований показываем плашку с замочком
+      if (pollsContainer) {
+        pollsContainer.innerHTML = `
+          <div style="text-align: center; padding: 40px 20px; background: rgba(255, 255, 255, 0.05); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); margin-top: 20px;">
+            <p style="font-size: 1.3rem; margin-bottom: 10px;">
+              🔒 <strong>Hlasování a výsledky jsou přístupné pouze členům spolku.</strong>
+            </p>
+            <p style="color: #a0a0a0; margin-bottom: 0;">
+              Pro zobrazení probíhajících anket a výsledků se prosím přihlaste výše.
+            </p>
+          </div>
+        `;
+      }
     }
-    renderPolls();
   });
-
   // =========================================================================
   // 3. ПОЛУЧЕНИЕ ГОЛОСОВАНИЙ В РЕАЛЬНОМ ВРЕМЕНИ
   // =========================================================================
