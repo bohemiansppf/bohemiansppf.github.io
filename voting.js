@@ -16,7 +16,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 // =========================================================================
-// 1. НАСТРОЙКИ FIREBASE (Замени значения в кавычках на данные из Firebase)
+// 1. НАСТРОЙКИ FIREBASE
 // =========================================================================
 const firebaseConfig = {
   apiKey: "AIzaSyB3mD-Bi8QTWGXe3fLZbs8bFLPp54qSOio",
@@ -27,16 +27,15 @@ const firebaseConfig = {
   appId: "1:422065637395:web:d8992a0a95b72e9f3017e6"
 };
 
-// Инициализация
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Фиктивный домен для работы авторизации без email
 const DUMMY_DOMAIN = "@bohemians.local";
 
 let currentUser = null;
 let pollsData = [];
+let unsubscribePolls = null; // Для управления подпиской на Firestore
 
 // =========================================================================
 // 2. РАБОТА С DOM И АВТОРИЗАЦИЕЙ
@@ -64,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (authError) authError.style.display = "none";
   });
 
-  // Обработка отправки формы входа
+  // Отправка формы входа
   loginForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
     const usernameInput = document.getElementById("username");
@@ -75,7 +74,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (authError) authError.style.display = "none";
 
-    // Приводим логин к формату e-mail
     const emailAuth = rawUsername.includes("@") ? rawUsername : `${rawUsername}${DUMMY_DOMAIN}`;
 
     try {
@@ -100,25 +98,45 @@ document.addEventListener("DOMContentLoaded", () => {
   onAuthStateChanged(auth, (user) => {
     currentUser = user;
     const pollsContainer = document.getElementById('polls-container');
-  
+
     if (user) {
-      // 1. Показываем шапку авторизованного юзера
+      // --- ЮЗЕР ВОШЕЛ ---
       const cleanUsername = user.email ? user.email.split("@")[0] : "Člen";
       if (userEmailSpan) userEmailSpan.innerText = cleanUsername;
-  
+
       if (authLoggedOut) authLoggedOut.style.display = "none";
       if (loginForm) loginForm.style.display = "none";
       if (authLoggedIn) authLoggedIn.style.display = "flex";
-  
-      // 2. Загружаем и отрисовываем голосования
-      renderPolls();
+
+      // Запрашиваем данные из базы ТОЛЬКО после успешного входа
+      if (!unsubscribePolls) {
+        const pollsRef = collection(db, "polls");
+        const q = query(pollsRef, orderBy("createdAt", "desc"));
+
+        unsubscribePolls = onSnapshot(q, (snapshot) => {
+          pollsData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+          renderPolls();
+        }, (error) => {
+          console.error("Firestore error:", error);
+          if (pollsContainer) {
+            pollsContainer.innerHTML = '<div class="polls-loading">Chyba při načítání dat.</div>';
+          }
+        });
+      }
     } else {
-      // 1. Показываем шапку для гостя
+      // --- ЮЗЕР НЕ ВОШЕЛ (ГОСТЬ) ---
+      // Отписываемся от базы, если вышли
+      if (unsubscribePolls) {
+        unsubscribePolls();
+        unsubscribePolls = null;
+      }
+      pollsData = [];
+
       if (authLoggedIn) authLoggedIn.style.display = "none";
       if (loginForm) loginForm.style.display = "none";
       if (authLoggedOut) authLoggedOut.style.display = "flex";
-  
-      // 2. Вместо списка голосований показываем плашку с замочком
+
+      // Показываем красивую заглушку с замочком
       if (pollsContainer) {
         pollsContainer.innerHTML = `
           <div style="text-align: center; padding: 40px 20px; background: rgba(255, 255, 255, 0.05); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); margin-top: 20px;">
@@ -133,26 +151,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
-  // =========================================================================
-  // 3. ПОЛУЧЕНИЕ ГОЛОСОВАНИЙ В РЕАЛЬНОМ ВРЕМЕНИ
-  // =========================================================================
-  const pollsRef = collection(db, "polls");
-  const q = query(pollsRef, orderBy("createdAt", "desc"));
-
-  onSnapshot(q, (snapshot) => {
-    pollsData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    renderPolls();
-  }, (error) => {
-    console.error("Firestore error:", error);
-    const pollsContainer = document.getElementById("polls-container");
-    if (pollsContainer) {
-      pollsContainer.innerHTML = '<div class="polls-loading">Chyba při načítání dat. Zkontrolujte připojení.</div>';
-    }
-  });
 });
 
 // =========================================================================
-// 4. ОТРЕСОВКА ОПРОСОВ И РЕЗУЛЬТАТОВ
+// 3. ОТРИСОВКА ОПРОСОВ И РЕЗУЛЬТАТОВ
 // =========================================================================
 function renderPolls() {
   const pollsContainer = document.getElementById("polls-container");
@@ -166,20 +168,16 @@ function renderPolls() {
   pollsContainer.innerHTML = "";
 
   pollsData.forEach(poll => {
-    // Проверка закрытия опроса по времени
     const isClosed = poll.closesAt && new Date(poll.closesAt.seconds * 1000) < new Date();
     
-    // Сбор всех голосов
     const votes = poll.votes || {};
     const totalVotes = Object.keys(votes).length;
     const userVotedOption = currentUser ? votes[currentUser.uid] : null;
 
-    // Подсчет голосов по каждому варианту
     const optionCounts = (poll.options || []).map((_, idx) => {
       return Object.values(votes).filter(v => v === idx).length;
     });
 
-    // Генерация HTML для опций
     let optionsHTML = "";
     (poll.options || []).forEach((optionText, idx) => {
       const count = optionCounts[idx];
@@ -209,7 +207,6 @@ function renderPolls() {
       `;
     });
 
-    // Карточка опроса
     const pollCard = document.createElement("div");
     pollCard.className = `poll-card ${isClosed ? "closed" : ""}`;
 
